@@ -15,7 +15,7 @@ public class TextBasedRPG {
     public static void main(String[] args)
     {
         System.out.println("Welcome to our RPG game!");
-        System.out.println("Press ENTER to begin...");
+        System.out.println("Press ENTER to begin the game...");
         scan.nextLine();
         intro();
     }
