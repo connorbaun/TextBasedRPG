@@ -37,6 +37,7 @@ public class TextBasedRPG {
         }
         System.out.println("Great, let's continue, " + name + "!");
         System.out.println("");
+        System.out.println("Here is your starting character stats: ");
         getStats();
         intro();
     }
@@ -48,6 +49,7 @@ public class TextBasedRPG {
             typewriter("After years of having absolutely zero game, you finally got a girlfriend.");
             typewriter("The problem is, she just met this cool guy named Chad in Science class. He is a football player, jacked, 6 foot 11, and has a lambo.");
             typewriter("Last night, Chad sent you a DM with the following message: ");
+            typewriter("... ... ... ", 200);
             System.out.println("Press ENTER to open Chad's DM: ");
             scan.nextLine();
             typewriter(": SENT FROM iPHONE :");
@@ -63,7 +65,7 @@ public class TextBasedRPG {
             scan.nextLine();
             System.out.println("");
             typewriter("Compared to chad, you are an absolute bozo...");
-            typewriter("With only 1 week till Prom, you need to gain as much aura as possible, or risk losing your girl forever!!!");
+            typewriter("With only 1 day till Prom, you need to gain as much aura as possible, or risk losing your girl forever!!!");
             System.out.println("What do you want to do? Type 1 or 2: ");
             System.out.println("1. Respond to Chad's text.");
             System.out.println("2. Check in w/ your Girl.");
@@ -141,7 +143,7 @@ public class TextBasedRPG {
         typewriter("----------");
         System.out.println("");
         typewriter("CHAD is typing...");
-        typewriter("...    ...    ...   ...", 100);
+        typewriter("...    ...    ...   ... ", 100);
         System.out.println(" ---> Chad:");
         typewriter("          LMAOOOO...bro you are such a lil bozo...gl getting her back...NERD!!!");
         typewriter("----------");
@@ -150,6 +152,8 @@ public class TextBasedRPG {
         scan.nextLine();
         System.out.println("");
         typewriter("Well, that did not go so well...");
+        currentAura -= 10;
+        System.out.println("*** 10 AURA LOST ***");
         typewriter("Now, you decide you must go talk to your girl to clear things up...");
         checkOnGirl();
 
@@ -210,8 +214,25 @@ public class TextBasedRPG {
             int numMins = scan.nextInt();
             scan.nextLine();
             typewriter("You continue to cry for " + numMins + " minutes.");
-            System.out.println("Hit ENTER to stop crying.");
-            scan.nextLine();
+            System.out.println("Hit ENTER to keep crying. Type STOP to stop.");
+            String cry = scan.nextLine();
+            while (!cry.equalsIgnoreCase("STOP"))
+            {
+                int ran = random.nextInt(3);
+                if (ran == 0)
+                {
+                    typewriter("WAH!...WAH!...WAHWAH!....WAH!!!...", 25);
+                }
+                else if(ran == 1)
+                {
+                    typewriter("IM SO SORRY!!! WAHHH!!! IM NOT CHAD!!!! WAHHHH!!", 25);
+                }
+                else if (ran == 2)
+                {
+                    typewriter("I'LL DO ANYTHING!!!!! PLEASE DONT GO WITH CHAD! wahhhhhhhhhhhhhh!!!!!", 25);
+                }
+                cry = scan.nextLine();
+            }
             System.out.println("After the crying show ends, your girl has the ick");
             currentAura-=20;
             System.out.println("*** 20 AURA LOST***");
@@ -226,12 +247,55 @@ public class TextBasedRPG {
     {
         typewriter("YOU: Let's go out tonight.");
         typewriter("GIRL: Wow, that is such a sweet idea! <3");
+        System.out.println("*** 100 AURA GAINED! ***");
+        currentAura += 100;
+        System.out.println("AURA LEVEL: " + currentAura);
+        System.out.println("** RANK UP!! ***");
+        currentRank = ranks[2];
         typewriter("What did you have in mind?");
         System.out.println("");
         System.out.println("What do you want to do? Type a number:");
         System.out.println("1. Taco Bell (Cost: $2)");
         System.out.println("2. Movies (Cost: $20)");
         System.out.println("YOU HAVE: $" + cash);
+        String choice = scan.nextLine();
+        if (choice.equals("1"))
+        {
+            tacoBell();
+        }
+        else if (choice.equals("3"))
+        {
+            movies();
+        }
+        else
+        {
+            System.out.println("that's not an option");
+            System.out.println("Hit ENTER to continue");
+            scan.nextLine();
+            dateOptions();
+        }
+    }
+
+    public static void tacoBell()
+    {
+        typewriter("You decide to take her out for a Taco Bell date.");
+        typewriter("She kind of enjoys this.");
+        cash-=2.00;
+        System.out.println("*** AURA GAINED ***");
+        currentAura += 20;
+        System.out.println("Current Aura: " + currentAura);
+        System.out.println("Cash: " + cash);
+    }
+
+    public static void movies()
+    {
+        typewriter("You decide to take her out for a movie date.");
+        typewriter("This was a good idea.");
+        cash-=20.00;
+        System.out.println("*** AURA GAINED ***");
+        currentAura += 100;
+        System.out.println("Current Aura: " + currentAura);
+        System.out.println("Cash: " + cash);
     }
 
 
